@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS Materiel (
-	n_materiel INT AUTO_INCREMENT,
-	etat VARCHAR(50) NOT NULL,
-	local INT,
-	PRIMARY KEY (n_materiel)
-) ENGINE=InnoDB;
