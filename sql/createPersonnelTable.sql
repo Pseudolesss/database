@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Personnel (
 	n_registre BIGINT NOT NULL,
 	nom VARCHAR(50) NOT NULL,
-	prénom  VARCHAR(50) NOT NULL,
+	prenom  VARCHAR(50) NOT NULL,
 	PRIMARY KEY (n_registre)
 ) ENGINE=InnoDB;

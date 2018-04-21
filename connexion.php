@@ -6,7 +6,8 @@ $host = "localhost";
 $login = $_SESSION['login'];
 $password = $_SESSION['password'];
 $basename = "projet";
-$tables = array('Animal','Climat','Enclos', 'Entretien', 'Espece', 'Institution', 'Intervention', 'Materiel', 'Personnel', 'Provenance', 'Technicien', 'Veterinaire', 'Temporaire');
+//$tables = array('Animal','Climat','Enclos', 'Entretien', 'Espece', 'Institution', 'Intervention', 'Materiel', 'Personnel', 'Provenance', 'Technicien', 'Veterinaire', 'Temporaire');
+$tables = array('Institution', 'Espece', 'Enclos', 'Materiel', 'Climat', 'Animal', 'Personnel', 'Veterinaire', 'Technicien', 'Intervention', 'Entretien', 'Provenance', 'Temporaire');
 
 function connexion()
 {
@@ -38,6 +39,18 @@ function connexion()
 
 $path = getcwd();
 
+// Dropping the tables
+for($j = 11; $j >= 0; $j--){
+	$sql = "DROP TABLE IF EXISTS $tables[$j]";
+	if (mysqli_query($link, $sql)) {
+	    echo "Table $tables[$j] dropped successfully";
+	    echo " <br />";
+	} else {
+	    echo "Error dropping $tables[$j]: " . mysqli_error($link);
+	    echo " <br />";
+	}
+}
+
 for($i = 0; $i < 12; $i++){
 
 
@@ -53,7 +66,7 @@ for($i = 0; $i < 12; $i++){
 	    echo " <br />";
 	}
 
-
+	/*
 	// Deleting tables contents if any
 	$sql = "DELETE FROM $tables[$i];";
 	if (mysqli_query($link, $sql)) {
@@ -63,7 +76,7 @@ for($i = 0; $i < 12; $i++){
 	    echo "Error deleting $tables[$i] content: " . mysqli_error($link);
 	    echo " <br />";
 	}
-
+	*/
 
 	// Filling tables
 
@@ -111,6 +124,7 @@ function display($i){
 	    echo '</tr>';
 	}
 	echo "</table>";
+	echo "<br />";
 
 }
     
