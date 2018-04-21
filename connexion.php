@@ -14,6 +14,7 @@ function connexion()
     global $host, $login, $password, $basename, $link, $tables;
 
     $link = mysqli_connect($host, $login, $password);
+    $_SESSION['link'] = $link;
     
 	    // Check connection
 	if (mysqli_connect_errno())

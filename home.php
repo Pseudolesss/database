@@ -36,7 +36,7 @@ include("connexion.php");
 }
 
 
-  mysqli_close($link);
+  mysqli_close($_SESSION['link']);
 
   echo '<form action="affichertexte.php" method="post">
   <p>
