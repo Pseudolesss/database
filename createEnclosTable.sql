@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS Enclos (
+	n_enclos INT AUTO_INCREMENT,
+	climat VARCHAR(50) NOT NULL,
+	taille INT NOT NULL,
+	PRIMARY KEY (n_enclos)
+) ENGINE=InnoDB;
