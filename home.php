@@ -1,3 +1,7 @@
+<?php  
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,54 +12,29 @@
        
 
 <?php
+  
+  $tables = $_SESSION['tables'];
 
-/*
-session_start();
-
-if (isset($_POST['username'], $_POST['password']) {
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['password'] = $_POST['password'];
-    echo '<a href="nextpage.php">Click to continue.</a>';
-} else {
-    // form
-}
-*/
-
-session_start();
-
-if (isset($_POST['login'], $_POST['password']) AND $_POST['login'] == "root" AND $_POST['password'] == "") {
-    $_SESSION['login'] = $_POST['login'];
-    $_SESSION['password'] = $_POST['password'];
-    
-include("connexion.php");   
-
-  connexion();
-
-  for($i = 0; $i < 12; $i++){
-  display($i);
-}
+  echo "<a href=\"href.php?reset\"> Reset Database </a> <br />";
+  echo '<br />';
+  echo 'display table ... <br />';
+  for($i = 0; $i < 12; $i++)
+  echo "<a href=\"href.php?display=$i\"> $tables[$i] </a> <br />";
 
 
-  mysqli_close($_SESSION['link']);
-
-  echo '<form action="affichertexte.php" method="post">
+  // Liste deroulante pour choix de la table question 2.a
+  echo 'Question 2.a <br />';
+  echo '
+  <form action="2a.php" method="post">
   <p>
-      <input type="text" name="prenom" /> <br />
-      <input type="text" name="a" /> <br />
-      <input type="text" name="b" /> <br />
-      <input type="text" name="c" /> <br />
-      <input type="text" name="d" /> <br />
-      <input type="text" name="e" /> <br />
-      <input type="text" name="f" /> <br />
-      <input type="submit" value="Valider" /> <br />
-  </p>
+  <select name="table">';
+  for($i = 0; $i < 12; $i++)
+  echo "<option value=\"$tables[$i]\">$tables[$i]</option>";
+  echo '<input type="submit" value="Valider" /> <br />
+</select>
+</p>
   </form>';
 
-}
-
-else {
-    echo '<a href="index.html">Bad login or password click to continue.</a>';
-}
 
 ?>
 

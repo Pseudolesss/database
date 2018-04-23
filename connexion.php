@@ -1,17 +1,14 @@
 <?php
 
-//session_start();
-
 $host = "localhost";
 $login = $_SESSION['login'];
 $password = $_SESSION['password'];
-$basename = "projet";
+$basename = $_SESSION['basename'];
 //$tables = array('Animal','Climat','Enclos', 'Entretien', 'Espece', 'Institution', 'Intervention', 'Materiel', 'Personnel', 'Provenance', 'Technicien', 'Veterinaire', 'Temporaire');
-$tables = array('Institution', 'Espece', 'Enclos', 'Materiel', 'Climat', 'Animal', 'Personnel', 'Veterinaire', 'Technicien', 'Intervention', 'Entretien', 'Provenance', 'Temporaire');
+$tables = $_SESSION['tables'];
 
-function connexion()
-{
-    global $host, $login, $password, $basename, $link, $tables;
+function connexion(){
+	global $host, $login, $password, $link;
 
     $link = mysqli_connect($host, $login, $password);
     $_SESSION['link'] = $link;
@@ -23,6 +20,13 @@ function connexion()
 	  echo " <br />";
 	  }
 
+}
+
+function initDatabase()
+{
+	global $host, $login, $password, $basename, $link, $tables;
+
+    connexion();
 
 	//Creation of a database
     $sql = "CREATE DATABASE IF NOT EXISTS $basename";
@@ -31,7 +35,7 @@ function connexion()
     	echo "Database created successfully";
     	echo " <br />";
 	} else {
-	    echo "Error creating database: " . mysqli_error($conn);
+	    echo "Error creating database: " . mysqli_error($link);
 	    echo " <br />";
 	}
 
@@ -67,18 +71,6 @@ for($i = 0; $i < 12; $i++){
 	    echo " <br />";
 	}
 
-	/*
-	// Deleting tables contents if any
-	$sql = "DELETE FROM $tables[$i];";
-	if (mysqli_query($link, $sql)) {
-	    echo "Table $tables[$i] content deleted successfully";
-	    echo " <br />";
-	} else {
-	    echo "Error deleting $tables[$i] content: " . mysqli_error($link);
-	    echo " <br />";
-	}
-	*/
-
 	// Filling tables
 
 	$sql = "LOAD DATA INFILE '$path/txt/$tables[$i].txt' INTO TABLE $tables[$i]\nFIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n'";
@@ -96,8 +88,12 @@ for($i = 0; $i < 12; $i++){
 }
 
 function display($i){
+	
+	global $link, $tables, $basename;
 
-	global $link, $tables;
+	// Set link variable
+	connexion();
+	mysqli_select_db($link, $basename);
 
 	echo "$tables[$i] <br />";
 
@@ -105,6 +101,32 @@ function display($i){
 
 	//get results from database
 	$result = mysqli_query($link,"SELECT * FROM $tables[$i]");
+	$all_property = array();  //declare an array for saving property
+
+	//showing property
+	echo '<table class="data-table">
+	        <tr class="data-heading">';  //initialize table tag
+	while ($property = mysqli_fetch_field($result)) {
+	    echo '<td>' . $property->name . '</td>';  //get field name for header
+	    array_push($all_property, $property->name);  //save those to array
+	}
+	echo '</tr>'; //end tr tag
+
+	//showing all data
+	while ($row = mysqli_fetch_array($result)) {
+	    echo "<tr>";
+	    foreach ($all_property as $item) {
+	        echo '<td>' . $row[$item] . '</td>'; //get items using property value
+	    }
+	    echo '</tr>';
+	}
+	echo "</table>";
+	echo "<br />";
+
+}
+
+function simpler_display($result){
+
 	$all_property = array();  //declare an array for saving property
 
 	//showing property
