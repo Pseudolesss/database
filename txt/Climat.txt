@@ -1,3 +1,4 @@
+nom_latin (str), nom_climat (str)
 Loxodonta africana,Savane
 Loxodonta africana,Forêt Tropicale
 Elephas maximus,Forêt Tropicale

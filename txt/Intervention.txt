@@ -1,3 +1,4 @@
+n_intervention (int), date (str), description (str), n_registre (int), nom_latin (str), n_puce (int)
 1,1/1/2017,soins divers,2,Elephas maximus,38
 2,1/1/2017,platre,3,Struthio camelus,13
 3,2/1/2017,platre,1,Pan troglodytes,14

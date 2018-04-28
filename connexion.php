@@ -1,15 +1,16 @@
 <?php
 
-$host = "localhost";
+$host = 'ms800.montefiore.ulg.ac.be'; //ms800.montefiore.ulg.ac.be
+$_SESSION['host'] = $host;
 $login = $_SESSION['login'];
 $password = $_SESSION['password'];
 $basename = $_SESSION['basename'];
-//$tables = array('Animal','Climat','Enclos', 'Entretien', 'Espece', 'Institution', 'Intervention', 'Materiel', 'Personnel', 'Provenance', 'Technicien', 'Veterinaire', 'Temporaire');
 $tables = $_SESSION['tables'];
 
 function connexion(){
 	global $host, $login, $password, $link;
 
+	echo "$host <br />";
     $link = mysqli_connect($host, $login, $password);
     $_SESSION['link'] = $link;
     
@@ -24,7 +25,9 @@ function connexion(){
 
 function initDatabase()
 {
-	global $host, $login, $password, $basename, $link, $tables;
+	global $tables;
+	$basename = $_SESSION['basename'];
+	$link = $_SESSION['link'];
 
     connexion();
 
@@ -73,7 +76,7 @@ for($i = 0; $i < 12; $i++){
 
 	// Filling tables
 
-	$sql = "LOAD DATA INFILE '$path/txt/$tables[$i].txt' INTO TABLE $tables[$i]\nFIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n'";
+	$sql = "LOAD DATA LOCAL INFILE '$path/txt/$tables[$i].txt' INTO TABLE $tables[$i]\nFIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' IGNORE 1 LINES";
 
 	  if (mysqli_query($link, $sql)) {
 	    echo "Table $tables[$i] filled successfully";
@@ -125,7 +128,7 @@ function display($i){
 
 }
 
-function simpler_display($result){
+function direct_display($result){
 
 	$all_property = array();  //declare an array for saving property
 

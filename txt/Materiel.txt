@@ -1,3 +1,4 @@
+n_matériel (int), état (str), local (str)
 1,Vide,S5
 2,Endommage,A2
 3,Vide,S6

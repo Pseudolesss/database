@@ -1,3 +1,4 @@
+n_registre (int)
 5
 6
 8

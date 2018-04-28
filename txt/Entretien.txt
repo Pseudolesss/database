@@ -1,3 +1,4 @@
+n_entretien (int), n_registre (int), n_materiel (int), date (str), n_enclos (int)
 1,13,2,1/1/2017,44
 2,21,46,2/1/2017,47
 3,22,23,2/1/2017,39

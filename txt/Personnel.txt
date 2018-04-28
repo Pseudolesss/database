@@ -1,3 +1,4 @@
+nom (str), prenom (str), n_registre (int)
 1,Onzia,Dedryck
 2,Deloose,Ellen
 3,Depoitre,Thibaut

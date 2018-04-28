@@ -1,3 +1,4 @@
+n_registre (int), n_licence (int), specialite (str)
 1,637437321,pandas
 2,515114611,oiseaux
 3,581169383,singes

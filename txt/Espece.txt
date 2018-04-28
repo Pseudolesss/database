@@ -1,3 +1,4 @@
+nom_latin (str), nom_courant (str), regime_alimentaire (str)
 Loxodonta africana,Elephant d'Afrique,Herbivore
 Elephas maximus,Elephant d'Asie,Herbivore
 Haliaeetus leucocephalus,Aigle,Carnivore

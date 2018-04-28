@@ -1,3 +1,4 @@
+nom_scientifique (str), n_puce (int), taille (int), sexe (str), date_naissance (str), n_enclos (int)
 Ursus maritimus,1,1764,M,11/9/2016,30
 Hippopotamus amphibius,1,729,M,4/7/2011,35
 Ailurus fulgens,1,643,F,12/10/2011,39

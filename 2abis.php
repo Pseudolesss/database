@@ -1,72 +1,145 @@
 <?php
 	session_start();
 	$table = $_SESSION['table'];
-	$all_property = array();
 
 
 	echo "<a href=\"home.php\"> Back to home page </a> <br />";
 
 	include("connexion.php");
 	connexion();
-	mysqli_select_db($_SESSION['link'], $_SESSION['basename']);
+	$link = $_SESSION['link'];
+	$basename = $_SESSION['basename'];
+	mysqli_select_db($link, $basename);
 
 		switch ($table) {
-			case 'Technicien':
 
-				$result = mysqli_query($_SESSION['link'], "SELECT * FROM $table LIMIT 1");
-				while ($property = mysqli_fetch_field($result)) {
-				    array_push($all_property, $property->name);  //save those to array
-				}
-
-				foreach ($all_property as $bah) {
-					echo "$bah <br />";
-				}
-
+			case 'Institution':
+				displayProjection(4);
 				break;
-
-			case 'Intervention':
-				if(!isset($_POST['n_intervention']) || trim($_POST['n_intervention']) == '')
-				{
-				   echo "You did not fill out the required fields.";
-				}
-
-				if(!isset($_POST['date']) )
-				{
-				   echo "not set";
-				}
-				if(trim($_POST['date']) == '')
-					echo "empty";
-
-				$result = mysqli_query($_SESSION['link'], "SELECT * FROM $table LIMIT 1");
-				while ($property = mysqli_fetch_field($result)) {
-				    array_push($all_property, $property->name);  //save those to array
-				}
-
-				foreach ($all_property as $bah) {
-					echo "$bah <br />";
-				}
-
+			case 'Espece':
+				displayProjection(3);
 				break;
-
+			case 'Climat':
+				displayProjection(2);
+				break;
 			case 'Animal':
-
-				$result = mysqli_query($_SESSION['link'], "SELECT * FROM $table LIMIT 1");
-				while ($property = mysqli_fetch_field($result)) {
-				    array_push($all_property, $property->name);  //save those to array
-				}
-
-				foreach ($all_property as $bah) {
-					echo "$bah <br />";
-				}
-
-				foreach($_POST as $bah){
-					echo "$bah <br />";
-				}
+				displayProjection(6);
+				break;
+			case 'Enclos':
+				displayProjection(3);
+				break;
+			case 'Materiel':
+				displayProjection(3);
+				break;
+			case 'Personnel':
+				displayProjection(3);
+				break;
+			case 'Veterinaire':
+				displayProjection(3);
+				break;
+			case 'Technicien':
+				displayProjection(1);
+				break;
+			case 'Intervention':
+				displayProjection(6);
+				break;
+			case 'Entretien':
+				displayProjection(5);
+				break;
+			case 'Provenance':
+				displayProjection(3);
+				break;
 			
 			default:
-				# code...
+				echo "Error request <br />";
 				break;
 		}
+
+	function displayProjection($i){
+
+		global $table, $link;
+		$setProjection = false;
+		$setSelection = false;
+
+		$sql = "SELECT * FROM $table ";
+		$buffer1 = "";
+		$buffer2 = " ";
+		$all_property = array();
+
+		$result = mysqli_query($link, "SELECT * FROM $table LIMIT 0");
+		while ($property = mysqli_fetch_field($result)) {
+		    array_push($all_property, $property->name);  //save those to array
+		}
+
+		// Filling buffer2 (projection)
+		$j = 0;
+		foreach ($_POST as $var) {
+			
+			if($j >= $i || !isset($var) || trim($var) == ''){
+				$j++;
+				continue;
+			}
+
+			if(is_string($var)){
+				if($setProjection){
+					$buffer2 .= "AND $all_property[$j] = '$var' ";
+				}
+				else{
+					$setProjection = true;
+					$buffer2 .= "WHERE $all_property[$j] = '$var' ";
+				}
+			}
+			else{
+				if($setProjection){
+					$buffer2 .= "AND $all_property[$j] = $var ";
+				}
+				else{
+					$setProjection = true;
+					$buffer2 .= "WHERE $all_property[$j] = $var ";
+				}
+			}
+
+			$j++;
+
+		}
+
+		// Filling buffer1 (selection)
+		$j = 0;
+		foreach ($_POST as $var) {
+			$l = $j-$i;
+			if($j < $i || !isset($var) ){
+				$j++;
+				continue;
+			}
+			if($setSelection)
+				$buffer1 .= ",$all_property[$l]";
+			else{
+				$setSelection = true;
+				$buffer1 .= "$all_property[$l]";
+			}
+
+			$j++;
+
+		}
+
+		echo "$buffer1 <br />";
+
+		if($buffer1 != "")
+			$sql = str_replace("*", $buffer1, $sql);
+
+		echo "$buffer2 <br />";
+
+		$sql .= $buffer2;
+		
+		echo "$sql <br/>";
+
+		$result = mysqli_query($link, $sql);
+		echo "$table <br />";
+		direct_display($result);
+
+
+
+	}
 
 
 

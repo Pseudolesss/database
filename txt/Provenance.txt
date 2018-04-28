@@ -1,3 +1,4 @@
+nom_latin (str), n_puce (int), nom_institution (str)
 Loxodonta africana,1,Parc National du Nord-Est du Groenland
 Ardea cinerea,1,Zoo d'Anvers
 Bubo scandiacus,1,Pairi Daiza

@@ -1,3 +1,4 @@
+nom (str), rue (str), code_postal (str), pays (str)
 Pairi Daiza,Domaine de Cambron,7940,Belgique
 Zoo d'Anvers,Koningin Astridplein,2018,Belgique
 Parc de Merlet,Rue de la Place,74310,France

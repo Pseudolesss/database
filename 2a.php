@@ -4,16 +4,6 @@ session_start();
 
 echo "<a href=\"home.php\"> Back to home page </a> <br /> <br />";
 
-/*
-include("connexion.php");
-connexion();
-
-mysqli_select_db($_SESSION['link'],$_SESSION['basename']);
-$result = mysqli_query($_SESSION['link'], "SELECT * FROM Materiel WHERE n_materiel = n_materiel AND local = local AND etat = etat");
-
-simpler_display($result);
-
-*/
 
 	if(isset($_POST['table']))
 		switch ($_POST['table']) {
@@ -26,6 +16,13 @@ simpler_display($result);
 			      rue(str): <input type="text" name="rue"/> <br />
 			      code_postal(str): <input type="text" name="code_postal" /> <br />
 			      pays(str): <input type="text" name="pays" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">nom_institution</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">rue</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">code_postal</label>
+			      <input type="checkbox" name="3" id="3" /> <label for="3">pays</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -38,6 +35,12 @@ simpler_display($result);
 			      nom_scientifique(str): <input type="text" name="nom_scientifique"  /> <br />
 			      nom_courant(str): <input type="text" name="nom_courant" /> <br />
 			      regime_alimentaire(str): <input type="text" name="regime_alimentaire" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">nom_scientifique</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">nom_courant</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">regime_alimentaire</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -49,6 +52,11 @@ simpler_display($result);
 			  <p>
 			      nom_scientifique(str): <input type="text" name="nom_scientifique"  /> <br />
 			      nom_climat(str): <input type="text" name="nom_climat" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">nom_scientifique</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">nom_climat</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -64,6 +72,15 @@ simpler_display($result);
 			      sexe(str): <input type="text" name="sexe" /> <br />
 			      date_naissance(str): <input type="text" name="date_naissance" /> <br />
 			      n_enclos(int): <input type="number" name="n_enclos" /> <br />
+			      
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">nom_scientifique</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">n_puce</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">taille</label>
+			      <input type="checkbox" name="3" id="3" /> <label for="3">sexe</label>
+			      <input type="checkbox" name="4" id="4" /> <label for="4">date_naissance</label>
+			      <input type="checkbox" name="5" id="5" /> <label for="5">n_enclos</label>
+			      
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -76,6 +93,10 @@ simpler_display($result);
 			      n_enclos(int):<input type="number" name="n_enclos" /> <br />
 			      climat(str):<input type="text" name="climat" /> <br />
 			      taille(int):<input type="number" name="taille" /> <br />
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_enclos</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">climat</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">taille</label>
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -88,6 +109,12 @@ simpler_display($result);
 			      n_materiel(int):<input type="number" name="n_materiel" /> <br />
 			      etat(str):<input type="text" name="etat"/> <br />
 			      local(str):<input type="text" name="local" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_materiel</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">etat</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">local</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -101,6 +128,12 @@ simpler_display($result);
 			      n_registre(int):<input type="number" name="n_registre" /> <br />
 			      nom(str):<input type="text" name="nom" /> <br />
 			      prenom(str):<input type="text" name="prenom"/> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_registre</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">nom</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">prenom</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -113,6 +146,12 @@ simpler_display($result);
 			      n_registre(int):<input type="number" name="n_registre"  /> <br />
 			      n_licence(int):<input type="number" name="n_licence" /> <br />
 			      specialite(str):<input type="text" name="specialite" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_registre</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">n_licence</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">specialite</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -123,6 +162,10 @@ simpler_display($result);
 	        echo '<form action="2abis.php" method="post">
 			  <p>
 			      n_registre(int):<input type="number" name="n_registre" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_registre</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -138,6 +181,15 @@ simpler_display($result);
 			      n_registre(int):<input type="number" name="n_registre"/> <br />
 			      nom_scientifique(str):<input type="text" name="nom_scientifique" /> <br />
 			      n_puce(int):<input type="number" name="n_puce" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_intervention</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">date</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">description</label>
+			      <input type="checkbox" name="3" id="3" /> <label for="3">n_registre</label>
+			      <input type="checkbox" name="4" id="4" /> <label for="4">nom_scientifique</label>
+			      <input type="checkbox" name="5" id="5" /> <label for="5">n_puce</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -152,6 +204,14 @@ simpler_display($result);
 			      n_materiel(int):<input type="number" name="n_materiel" /> <br />
 			      date(str):<input type="text" name="date" /> <br />
 			      n_enclos(int):<input type="number" name="n_enclos" /> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">n_entretien</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">n_registre</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">n_materiel</label>
+			      <input type="checkbox" name="3" id="3" /> <label for="3">date</label>
+			      <input type="checkbox" name="4" id="4" /> <label for="4">n_enclos</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
@@ -164,6 +224,12 @@ simpler_display($result);
 			      nom_scientifique(str):<input type="text" name="nom_scientifique"/> <br />
 			      n_enclos(int):<input type="number" name="n_enclos"/> <br />
 			      nom_institution(str):<input type="text" name="nom_institution"/> <br />
+
+			      Selection: <br />
+			      <input type="checkbox" name="0" id="0" /> <label for="0">nom_scientifique</label>
+			      <input type="checkbox" name="1" id="1" /> <label for="1">n_enclos</label>
+			      <input type="checkbox" name="2" id="2" /> <label for="2">nom_institution</label>
+
 			      <input type="submit" value="Valider" /> <br />
 			  </p>
 			  </form>';
