@@ -44,8 +44,9 @@ FROM (
 )	
 
 */
-	
-	SELECT nom_scientifique, climat FROM
+	/* 
+	SELECT nom_scientifique, climat 
+	FROM
 		(SELECT nom_scientifique, n_puce, n_enclos 
 		FROM 
 			( SELECT nom_scientifique, n_puce, n_enclos
@@ -60,9 +61,37 @@ FROM (
 		) d		
 	
 	WHERE (nom_scientifique , climat) IN
-		SELECT * FROM
+		SELECT * 
+		FROM(
 			(SELECT nom_scientifique
 			FROM Espece) g
 			NATURAL JOIN
 			(SELECT *
-			FROM Climat) h
+			FROM Climat) h)
+ */
+ 
+ 
+ 
+	SELECT nom_scientifique, climat 
+	FROM(
+		(SELECT nom_scientifique, n_puce, n_enclos 
+		FROM 
+			( SELECT nom_scientifique, n_puce, n_enclos
+			FROM Animal) a
+			NATURAL JOIN
+			( SELECT nom_scientifique, n_puce
+			FROM Intervention) b
+		) c	
+		NATURAL JOIN
+		(SELECT n_enclos, climat
+		FROM Enclos
+		) d	)
+	
+	WHERE (nom_scientifique, climat) NOT IN (
+		SELECT *
+		FROM
+			(SELECT nom_scientifique
+			FROM Espece) g
+			NATURAL JOIN
+			(SELECT *
+			FROM Climat) h)
