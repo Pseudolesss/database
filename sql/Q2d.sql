@@ -71,8 +71,7 @@ FROM (
  */
  
  
- 
-	SELECT nom_scientifique, climat 
+SELECT nom_scientifique, climat 
 	FROM(
 		(SELECT nom_scientifique, n_puce, n_enclos 
 		FROM 
@@ -87,11 +86,11 @@ FROM (
 		FROM Enclos
 		) d	)
 	
-	WHERE (nom_scientifique, climat) NOT IN (
-		SELECT *
-		FROM
-			(SELECT nom_scientifique
-			FROM Espece) g
-			NATURAL JOIN
-			(SELECT *
-			FROM Climat) h)
+	WHERE (nom_scientifique, climat) NOT IN(
+		SELECT nom_scientifique, climat 
+			FROM
+				(SELECT nom_scientifique
+				FROM Espece) g
+				NATURAL JOIN
+				(SELECT *
+				FROM Climat) h)
